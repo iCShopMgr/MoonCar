@@ -12,22 +12,22 @@ namespace mooncar {
     }
 
 	export enum Direction {
-			//% block="Forward"
-			direct1 = 1,
-			//% block="Back"
-			direct2 = 2,
-			//% block="Left"
-			direct3 = 3,
-			//% block="Right"
-            direct4 = 4,
-            //% block="Stop"
-            direct5 = 5
+		//% block="Forward"
+		direct1 = 1,
+		//% block="Back"
+		direct2 = 2,
+		//% block="Left"
+		direct3 = 3,
+		//% block="Right"
+		direct4 = 4,
+		//% block="Stop"
+		direct5 = 5
 	}
 
-	//%block="MoonCar to |move %Direction| Speed %number"
+	//%block="MoonCar to |move %Direction |Speed %number"
 	export function MoonCar_go(direction: Direction = 1, movespeed: number): void {
-		if(movespeed>100)movespeed = 100
-		if(movespeed<0)movespeed = 0
+		if(movespeed > 100)movespeed = 100
+		if(movespeed < 0)movespeed = 0
 		movespeed = Math.map(movespeed, 0, 100, 0, 1023)
         
         switch(direction) {
@@ -36,7 +36,7 @@ namespace mooncar {
 				break;
 			case 2:
 				moveMotor(0, 0, movespeed, movespeed)
-				break; 
+				break;
 			case 3:
 				moveMotor(movespeed, 0, 0, movespeed)
 				break;
@@ -48,4 +48,35 @@ namespace mooncar {
                 break;		
 		}
 	}
+
+	//%block="MoonCar Wheel |Left %number |Right %number"
+	export function MoonCar_LR(left:  number, right: number): void {
+		if(left > 100)left = 100
+		if(left < -100)left = -100
+		if(right > 100)right = 100
+		if(right < -100)right = -100
+		if (left > 0) {
+			left = Math.map(left, 0, 100, 0, 1023)
+			pins.analogWritePin(AnalogPin.P2, left)
+        	pins.analogWritePin(AnalogPin.P13, 0)	
+		}
+		else {
+			left = left * -1
+			left = Math.map(left, 0, 100, 0, 1023)
+			pins.analogWritePin(AnalogPin.P2, 0)
+        	pins.analogWritePin(AnalogPin.P13, left)
+		}
+		if (right > 0) {
+			right = Math.map(right, 0, 100, 0, 1023)
+			pins.analogWritePin(AnalogPin.P8, right)
+			pins.analogWritePin(AnalogPin.P14, 0)	
+		}
+		else {
+			right = right * -1
+			right = Math.map(right, 0, 100, 0, 1023)
+			pins.analogWritePin(AnalogPin.P8, 0)
+        	pins.analogWritePin(AnalogPin.P14, right)
+		}
+	}
 }
+
