@@ -24,7 +24,7 @@ namespace mooncar {
 		direct5 = 5
 	}
 
-	//%block="MoonCar to |move %Direction |Speed %number"
+	//%block="MoonCar to |move %Direction |Speed %number "%""
 	export function MoonCar_go(direction: Direction = 1, movespeed: number): void {
 		if(movespeed > 100)movespeed = 100
 		if(movespeed < 0)movespeed = 0
@@ -49,7 +49,7 @@ namespace mooncar {
 		}
 	}
 
-	//%block="MoonCar Wheel |Left %number |Right %number"
+	//%block="MoonCar wheel speed |Left %number |Right %number "%""
 	export function MoonCar_LR(left: number=0, right: number=0): void {
 		if(left > 100)left = 100
 		if(left < -100)left = -100
