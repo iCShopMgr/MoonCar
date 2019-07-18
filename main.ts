@@ -131,5 +131,49 @@ namespace mooncar {
 		}
 		return pushvalue
 	}
+
+	//%block="Color Sensor init"
+	export function Color_Sensor_init(): void {
+		pins.i2cWriteNumber(41, 33276, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
+		basic.pause(10)
+	}
+
+	export enum Channel {
+		//% block="R Channel"
+		channel1 = 1,
+		//% block="G Channel"
+		channel2 = 2,
+		//% block="B Channel"
+		channel3 = 3
+	}
+
+	//%block="Color Sensor read RGB %channel"
+	export function Color_Sensor_Read(channel: Channel=1): number {
+		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
+		let ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
+		let State = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 182, NumberFormat.Int8LE, true)
+		let TCS_RED = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 184, NumberFormat.Int8LE, true)
+		let TCS_GREEN = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 186, NumberFormat.Int8LE, true)
+		let TCS_BLUE = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+
+		switch(channel) {
+			case 1:
+				return TCS_RED
+				break;
+			case 2:
+				return TCS_GREEN
+				break;
+			case 3:
+				return TCS_BLUE
+				break;
+		}
+
+	}
+	
 }
 
