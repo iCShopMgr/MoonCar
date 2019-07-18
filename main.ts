@@ -1,4 +1,4 @@
-//% weight=0 color=#b5b100 icon="\uf299" block="MoonCar"
+//% weight=0 color=#CCB72C icon="\uf299" block="MoonCar"
 namespace mbitbot {
     pins.setPull(DigitalPin.P7, PinPullMode.PullUp)
 	pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
