@@ -36,7 +36,7 @@ namespace mooncar {
 				break;
 			case 2:
 				moveMotor(0, 0, movespeed, movespeed)
-				break;
+				break; 
 			case 3:
 				moveMotor(movespeed, 0, 0, movespeed)
 				break;
