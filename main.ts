@@ -116,5 +116,17 @@ namespace mooncar {
 
 		return distance = Math.round(distance / 2 / 29)
 	}
+
+	//%block="Push Bottom"
+    export function Push_Bottom(): number {
+		let pushvalue = pins.digitalReadPin(DigitalPin.P7)
+		if (pushvalue == 1) {
+			pushvalue = 0
+		}
+		else {
+			pushvalue = 1
+		}
+		return pushvalue
+	}
 }
 
