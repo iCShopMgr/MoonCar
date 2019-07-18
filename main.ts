@@ -140,15 +140,15 @@ namespace mooncar {
 	}
 
 	export enum Channel {
-		//% block="R Channel"
+		//% block="R"
 		channel1 = 1,
-		//% block="G Channel"
+		//% block="G"
 		channel2 = 2,
-		//% block="B Channel"
+		//% block="B"
 		channel3 = 3
 	}
 
-	//%block="Color Sensor read RGB %channel"
+	//%block="Color Sensor read RGB %channel |channel"
 	export function Color_Sensor_Read(channel: Channel=1): number {
 		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
 		let ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
