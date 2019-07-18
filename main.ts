@@ -1,27 +1,27 @@
 //% weight=0 color=#CCB72C icon="\uf299" block="MoonCar"
-namespace mbitbot {
-    pins.setPull(DigitalPin.P7, PinPullMode.PullUp)
+namespace MoonCar {
+	pins.setPull(DigitalPin.P7, PinPullMode.PullUp)
 	pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
-    pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
+	pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
     
-    function moveMotor(num1: number, num2: number, num3: number, num4: number) {
-        pins.analogWritePin(AnalogPin.P2, num1)
-        pins.analogWritePin(AnalogPin.P8, num2)
-        pins.analogWritePin(AnalogPin.P13, num3)
-        pins.analogWritePin(AnalogPin.P14, num4)
-    }
+	function moveMotor(num1: number, num2: number, num3: number, num4: number) {
+		pins.analogWritePin(AnalogPin.P2, num1)
+		pins.analogWritePin(AnalogPin.P8, num2)
+		pins.analogWritePin(AnalogPin.P13, num3)
+		pins.analogWritePin(AnalogPin.P14, num4)
+	}
 
 	export enum Direction {
-			//% block="ForWord"
-			direct1 = 1,
-			//% block="Back"
-			direct2 = 2,
-			//% block="Left"
-			direct3 = 3,
-			//% block="Right"
-            direct4 = 4,
-            //% block="Stop"
-            direct5 = 5
+		//% block="ForWord"
+		direct1 = 1,
+		//% block="Back"
+		direct2 = 2,
+		//% block="Left"
+		direct3 = 3,
+		//% block="Right"
+		direct4 = 4,
+		//% block="Stop"
+		direct5 = 5
 	}
 
 	//%block="MoonCar to |move %Direction| Speed %number"
@@ -29,8 +29,8 @@ namespace mbitbot {
 		if(movespeed>100)movespeed = 100
 		if(movespeed<0)movespeed = 0
 		movespeed = Math.map(movespeed, 0, 100, 0, 1023)
-        
-        switch(direction) {
+
+		switch(direction) {
 			case 1:
 				moveMotor(1023, 1023, 0, 0)
 				break;
@@ -42,10 +42,10 @@ namespace mbitbot {
 				break;
 			case 4:
 				moveMotor(0, 1023, 1023, 0)
-                break;
-            case 5:
-                moveMotor(0, 0, 0, 0)
-                break;		
+				break;
+			case 5:
+				moveMotor(0, 0, 0, 0)
+				break;		
 		}
 	}
 }
