@@ -1,5 +1,5 @@
 //% weight=0 color=#CCB72C icon="\uf299" block="MoonCar"
-namespace MoonCar {
+namespace mooncar {
 	pins.setPull(DigitalPin.P7, PinPullMode.PullUp)
 	pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
 	pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
