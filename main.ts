@@ -24,7 +24,7 @@ namespace mooncar {
 		direct5 = 5
 	}
 
-	//%block="MoonCar to move %direction |movespeed %number |%"
+	//%block="MoonCar to move %direction |speed %movespeed |"%""
 	export function MoonCar_go(direction: Direction = 1, movespeed: number): void {
 		if(movespeed > 100)movespeed = 100
 		if(movespeed < 0)movespeed = 0
@@ -49,7 +49,7 @@ namespace mooncar {
 		}
 	}
 
-	//%block="MoonCar wheel speed Left %left |Right %right |%"
+	//%block="MoonCar wheel speed Left %left |Right %right |"%""
 	export function MoonCar_LR(left: number=0, right: number=0): void {
 		if(left > 100)left = 100
 		if(left < -100)left = -100
@@ -80,7 +80,7 @@ namespace mooncar {
 	}
 
 	//%block="Line Follower Sensor"
-    export function Line_Follower_Sensor: number {
+    export function Line_Follower_Sensor(): number {
 		let position = 0
 		let line_follow_Left_Pin = DigitalPin.P15
         let line_follow_Right_Pin = DigitalPin.P16
