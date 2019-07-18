@@ -4,7 +4,7 @@ namespace MoonCar {
 	pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
 	pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
     
-	function moveMotor(num1: number, num2: number, num3: number, num4: number) {
+	function moveMotor (num1: number, num2: number, num3: number, num4: number) {
 		pins.analogWritePin(AnalogPin.P2, num1)
 		pins.analogWritePin(AnalogPin.P8, num2)
 		pins.analogWritePin(AnalogPin.P13, num3)
@@ -25,7 +25,7 @@ namespace MoonCar {
 	}
 
 	//%block="MoonCar to |move %Direction| Speed %number"
-	export function MoonCar_go(direction: Direction = 1, movespeed: number): void {
+	export function MoonCar_go (direction: Direction = 1, movespeed: number): void {
 		if(movespeed>100)movespeed = 100
 		if(movespeed<0)movespeed = 0
 		movespeed = Math.map(movespeed, 0, 100, 0, 1023)
