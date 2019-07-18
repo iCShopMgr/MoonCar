@@ -102,6 +102,19 @@ namespace mooncar {
 			}
 		}
 		return position
-    }
+	}
+	
+	//%block="Ultrasonic Sensor"
+    export function Ultrasonic_Sensor(): number {
+		let distance = 0
+
+		pins.setPull(DigitalPin.P3, PinPullMode.PullNone);
+		pins.digitalWritePin(DigitalPin.P3, 1);
+		control.waitMicros(1000)
+		pins.digitalWritePin(DigitalPin.P3, 0);
+		distance = pins.pulseIn(DigitalPin.P9, PulseValue.High)
+
+		return distance = Math.round(distance / 2 / 29)
+	}
 }
 
