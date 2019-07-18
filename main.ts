@@ -24,7 +24,7 @@ namespace MoonCar {
 		direct5 = 5
 	}
 
-	//%block="MoonCar to |move %Direction| Speed %number"
+	//%block="MoonCar to |move %Direction |Speed %number"
 	export function MoonCar_go (direction: Direction = 1, movespeed: number): void {
 		if(movespeed>100)movespeed = 100
 		if(movespeed<0)movespeed = 0
