@@ -78,5 +78,30 @@ namespace mooncar {
         	pins.analogWritePin(AnalogPin.P14, right)
 		}
 	}
+
+	//%block="Line Follower Sensor"
+    export function Line_Follower_Sensor: number {
+		let position = 0
+		let line_follow_Left_Pin = DigitalPin.P15
+        let line_follow_Right_Pin = DigitalPin.P16
+
+        if (pins.digitalReadPin(DigitalPin.P15) == 0) {
+			if (pins.digitalReadPin(DigitalPin.P16) == 0) {
+				position = 0
+			}
+			else {
+				position = 1
+			}
+		}
+		else {
+			if (pins.digitalReadPin(DigitalPin.P16) == 0) {
+				position = 2
+			}
+			else {
+				position = 3
+			}
+		}
+		return position
+    }
 }
 
