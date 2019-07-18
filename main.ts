@@ -50,7 +50,7 @@ namespace mooncar {
 	}
 
 	//%block="MoonCar Wheel |Left %number |Right %number"
-	export function MoonCar_LR(left:  number, right: number): void {
+	export function MoonCar_LR(left: number=0, right: number=0): void {
 		if(left > 100)left = 100
 		if(left < -100)left = -100
 		if(right > 100)right = 100
