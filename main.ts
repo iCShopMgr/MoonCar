@@ -138,17 +138,6 @@ namespace mooncar {
 		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
 		basic.pause(10)
 	}
-
-	export enum Channel {
-		//% block="R"
-		channel1 = 1,
-		//% block="G"
-		channel2 = 2,
-		//% block="B"
-		channel3 = 3
-	}
-
-	
-	
+		
 }
 
