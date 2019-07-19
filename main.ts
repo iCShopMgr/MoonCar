@@ -104,17 +104,16 @@ namespace mooncar {
 	
 	//%block="Ultrasonic Sensor"
     export function Ultrasonic_Sensor(): number {
-		led.enable(false)
-		basic.pause(10)
 		let distance = 0
 		pins.setPull(DigitalPin.P3, PinPullMode.PullNone);
-		pins.digitalWritePin(DigitalPin.P3, 1);
-		control.waitMicros(1000)
+
 		pins.digitalWritePin(DigitalPin.P3, 0);
+		control.waitMicros(2);
+		pins.digitalWritePin(DigitalPin.P3, 1);
+		control.waitMicros(10)
+		pins.digitalWritePin(DigitalPin.P3, 0);
+
 		distance = pins.pulseIn(DigitalPin.P9, PulseValue.High)
-		
-		led.enable(true)
-		basic.pause(10)
 		return distance = Math.round(distance / 2 / 29)
 	}
 
