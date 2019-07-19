@@ -160,18 +160,21 @@ namespace mooncar {
 		let TCS_GREEN = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 186, NumberFormat.Int8LE, true)
 		let TCS_BLUE = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
-
+		
+		let RdCl = 0
 		switch(channel) {
 			case 1:
-				return TCS_RED
+				RdCl = TCS_RED
 				break;
 			case 2:
-				return TCS_GREEN
+				RdCl =  TCS_GREEN
 				break;
 			case 3:
-				return TCS_BLUE
+				RdCl = TCS_BLUE
 				break;
 		}
+		
+		return RdCl
 
 	}
 	
