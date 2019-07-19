@@ -133,7 +133,7 @@ namespace mooncar {
 	export function Color_Sensor_init(): void {
 		pins.i2cWriteNumber(41, 33276, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
-		pins.digitalWritePin(DigitalPin.P11, 1);
+		pins.digitalWritePin(DigitalPin.P11, 0);
 		basic.pause(10)
 	}
 
@@ -162,13 +162,13 @@ namespace mooncar {
 		let RdCl = 0
 		switch(channel) {
 			case 1:
-				RdCl = TCS_RED
+				RdCl = Math.map(TCS_RED, 0, 100, 0, 65535)
 				break;
 			case 2:
-				RdCl =  TCS_GREEN
+				RdCl =  Math.map(TCS_GREEN, 0, 100, 0, 65535)
 				break;
 			case 3:
-				RdCl = TCS_BLUE
+				RdCl = Math.map(TCS_BLUE, 0, 100, 0, 65535)
 				break;
 		}
 		
