@@ -82,8 +82,6 @@ namespace mooncar {
 	//%block="Line Follower Sensor"
     export function Line_Follower_Sensor(): number {
 		let position = 0
-		let line_follow_Left_Pin = DigitalPin.P15
-        let line_follow_Right_Pin = DigitalPin.P16
 
         if (pins.digitalReadPin(DigitalPin.P15) == 0) {
 			if (pins.digitalReadPin(DigitalPin.P16) == 0) {
@@ -107,7 +105,7 @@ namespace mooncar {
 	//%block="Ultrasonic Sensor"
     export function Ultrasonic_Sensor(): number {
 		led.enable(false)
-
+		basic.pause(10)
 		let distance = 0
 		pins.setPull(DigitalPin.P3, PinPullMode.PullNone);
 		pins.digitalWritePin(DigitalPin.P3, 1);
@@ -116,7 +114,7 @@ namespace mooncar {
 		distance = pins.pulseIn(DigitalPin.P9, PulseValue.High)
 		
 		led.enable(true)
-		
+		basic.pause(10)
 		return distance = Math.round(distance / 2 / 29)
 	}
 
@@ -136,6 +134,7 @@ namespace mooncar {
 	export function Color_Sensor_init(): void {
 		pins.i2cWriteNumber(41, 33276, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
+		pins.digitalWritePin(DigitalPin.P11, 1);
 		basic.pause(10)
 	}
 
@@ -160,7 +159,7 @@ namespace mooncar {
 		let TCS_GREEN = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 186, NumberFormat.Int8LE, true)
 		let TCS_BLUE = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
-		
+
 		let RdCl = 0
 		switch(channel) {
 			case 1:
