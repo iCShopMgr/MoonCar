@@ -162,13 +162,13 @@ namespace mooncar {
 		let RdCl = 0
 		switch(channel) {
 			case 1:
-				RdCl = Math.map(TCS_RED, 0, 100, 0, 65535)
+				RdCl = Math.round(Math.map(TCS_RED, 0, 65535, 0, 100))
 				break;
 			case 2:
-				RdCl =  Math.map(TCS_GREEN, 0, 100, 0, 65535)
+				RdCl =  Math.round(Math.map(TCS_GREEN, 0, 65535, 0, 100))
 				break;
 			case 3:
-				RdCl = Math.map(TCS_BLUE, 0, 100, 0, 65535)
+				RdCl = Math.round(Math.map(TCS_BLUE, 0, 65535, 0, 100))
 				break;
 		}
 		
