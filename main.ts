@@ -224,5 +224,10 @@ namespace mooncar {
 		return read_IR();
 	}
 	
+	//%block="on IR message received" blockInlineInputs=true
+    //%weight=70 blockGap=10
+    export function onReceivedIR(): void {
+        
+    }
 }
 
