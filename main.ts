@@ -194,7 +194,7 @@ namespace mooncar {
 		}
 		return c;
 	}
-
+	let last_res = 0
 	function read_IR() {
 		wait_for_signal();
 		let c1 = 0;
@@ -212,6 +212,10 @@ namespace mooncar {
 				res = res + 1;
 			}
 		}
+		if (res > 1000000000) {
+			res = last_res
+		}
+		last_res = res
 		return res;
 	}
 
