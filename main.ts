@@ -28,7 +28,7 @@ namespace mooncar {
 	export function MoonCar_go(direction: Direction = 1, movespeed: number): void {
 		if(movespeed > 100)movespeed = 100
 		if(movespeed < 0)movespeed = 0
-		movespeed = Math.map(movespeed, 0, 100, 0, 1023)
+		movespeed = Math.round(Math.map(movespeed, 0, 100, 0, 1023))
         
         switch(direction) {
 			case 1:
@@ -56,47 +56,46 @@ namespace mooncar {
 		if(right > 100)right = 100
 		if(right < -100)right = -100
 		if (left > 0) {
-			left = Math.map(left, 0, 100, 0, 1023)
+			left = Math.round(Math.map(left, 0, 100, 0, 1023))
 			pins.analogWritePin(AnalogPin.P2, left)
         	pins.analogWritePin(AnalogPin.P13, 0)	
 		}
 		else {
 			left = left * -1
-			left = Math.map(left, 0, 100, 0, 1023)
+			left = Math.round(Math.map(left, 0, 100, 0, 1023))
 			pins.analogWritePin(AnalogPin.P2, 0)
         	pins.analogWritePin(AnalogPin.P13, left)
 		}
 		if (right > 0) {
-			right = Math.map(right, 0, 100, 0, 1023)
+			right = Math.round(Math.map(right, 0, 100, 0, 1023))
 			pins.analogWritePin(AnalogPin.P8, right)
 			pins.analogWritePin(AnalogPin.P14, 0)	
 		}
 		else {
 			right = right * -1
-			right = Math.map(right, 0, 100, 0, 1023)
+			right = Math.round(Math.map(right, 0, 100, 0, 1023))
 			pins.analogWritePin(AnalogPin.P8, 0)
         	pins.analogWritePin(AnalogPin.P14, right)
 		}
 	}
 
+    let position = 0
 	//%block="Line Follower Sensor"
     export function Line_Follower_Sensor(): number {
-		let position = 0
-
-        if (pins.digitalReadPin(DigitalPin.P15) == 0) {
-			if (pins.digitalReadPin(DigitalPin.P16) == 0) {
-				position = 3
+        if (pins.digitalReadPin(DigitalPin.P15) == 1) {
+			if (pins.digitalReadPin(DigitalPin.P16) == 1) {
+				position = 0
 			}
 			else {
-				position = 2
+				position = 1
 			}
 		}
 		else {
-			if (pins.digitalReadPin(DigitalPin.P16) == 0) {
-				position = 1
+			if (pins.digitalReadPin(DigitalPin.P16) == 1) {
+				position = 2
 			}
 			else {
-				position = 0
+				position = 3
 			}
 		}
 		return position
@@ -162,18 +161,17 @@ namespace mooncar {
 		let RdCl = 0
 		switch(channel) {
 			case 1:
-				RdCl = Math.round(Math.map(TCS_RED, 0, 65535, 0, 100))
+				RdCl = Math.round(Math.map(TCS_RED, 0, 65535, 0, 1023))
 				break;
 			case 2:
-				RdCl =  Math.round(Math.map(TCS_GREEN, 0, 65535, 0, 100))
+				RdCl =  Math.round(Math.map(TCS_GREEN, 0, 65535, 0, 1023))
 				break;
 			case 3:
-				RdCl = Math.round(Math.map(TCS_BLUE, 0, 65535, 0, 100))
+				RdCl = Math.round(Math.map(TCS_BLUE, 0, 65535, 0, 1023))
 				break;
 		}
 		
 		return RdCl
-
 	}
 	
 }
