@@ -189,8 +189,17 @@ namespace mooncar {
 	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
 	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
 
-	//%block="IR Remote"
-    export function IR_Remote(): number {
+	let IRREAD: Action;
+
+	//%block="IR Read"
+	export function IR_Read(): number {
+		return Pnumber
+	}
+
+	//% blockId=onReceivedIR block="on IR message received" blockInlineInputs=true
+	//% weight=70 blockGap=10
+	export function IR_Remote(add: Action): void {
+		IRREAD = add
 		if (readir.length >= 69) {
 			//serial.writeLine("len: " + readir.length)
 			for (let i = 0; i <= 10; i++) {
@@ -229,9 +238,7 @@ namespace mooncar {
 			serial.writeLine("")
 			IRcode = []
 			readir = []
-			return Pnumber
 		}
-		return 0
 	}
 		
 }
