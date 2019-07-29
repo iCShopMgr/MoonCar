@@ -195,7 +195,7 @@ namespace mooncar {
 	control.inBackground(function () {
 		basic.forever(function () {
 			if (Reading == true) {
-				if (readir.length >= 69) {
+				while (readir.length < 69) {
 					//serial.writeLine("len: " + readir.length)
 					for (let i = 0; i <= 10; i++) {
 						if (readir[i] > 8000 && readir[i] < 10000) {
@@ -236,7 +236,6 @@ namespace mooncar {
 					}
 					IRcode = []
 					readir = []
-					control.waitMicros(10)
 				}
 			}
 		})
