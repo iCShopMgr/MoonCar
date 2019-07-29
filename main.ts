@@ -246,7 +246,7 @@ namespace mooncar {
 		return Pnumber
 	}
 
-	//block="IR Remote" blockInlineInputs=true
+	//%block="IR Remote" blockInlineInputs=true
 	//% weight=80 blockGap=10
 	export function IR_Remote(add: Action): void {
 		IRREAD = add
