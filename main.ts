@@ -190,6 +190,53 @@ namespace mooncar {
 	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
 
 	let IRREAD: Action;
+	let IR_Reading = false
+	control.inBackground(function () {
+		basic.forever(function () {
+			if (IR_Reading == true) {
+				if (readir.length >= 69) {
+					//serial.writeLine("len: " + readir.length)
+					for (let i = 0; i <= 10; i++) {
+						if (readir[i] > 8000 && readir[i] < 10000) {
+							IRcount = 0
+							for (let check = i + 3; check <= i + 33; check++) {
+								if (check % 2 == 0) {
+									if (readir[check] > 1000) {
+										IRcount += 1
+									}
+									if (IRcount == 8) {
+										IRcount = 0
+										for (let value = check + 2; value <= check + 33; value++) {
+											if (value % 2 == 0) {
+												if (readir[value] > 1000) {
+													IRcount = 1
+												}
+												else {
+													IRcount = 0
+												}
+												IRcode.push(IRcount)
+											}
+										}
+										break
+									}
+								}
+							}
+						}
+					}
+					Pnumber = 0
+					for (let i = 0; i < IRcode.length; i++) {
+						if (IRcode[i] == 1) {
+							Pnumber = Pnumber + (1 << (15 - i))
+						}
+					}
+					serial.writeLine("")
+					IRcode = []
+					readir = []
+				}
+			}
+		})
+	})
+
 
 	//%block="IR Read"
 	export function IR_Read(): number {
@@ -200,45 +247,7 @@ namespace mooncar {
 	//% weight=70 blockGap=10
 	export function IR_Remote(add: Action): void {
 		IRREAD = add
-		if (readir.length >= 69) {
-			//serial.writeLine("len: " + readir.length)
-			for (let i = 0; i <= 10; i++) {
-				if (readir[i] > 8000 && readir[i] < 10000) {
-					IRcount = 0
-					for (let check = i + 3; check <= i + 33; check++) {
-						if (check % 2 == 0) {
-							if (readir[check] > 1000) {
-								IRcount += 1
-							}
-							if (IRcount == 8) {
-								IRcount = 0
-								for (let value = check + 2; value <= check + 33; value++) {
-									if (value % 2 == 0) {
-										if (readir[value] > 1000) {
-											IRcount = 1
-										}
-										else {
-											IRcount = 0
-										}
-										IRcode.push(IRcount)
-									}
-								}
-								break
-							}
-						}
-					}
-				}
-			}
-			Pnumber = 0
-			for (let i = 0; i < IRcode.length; i++) {
-				if (IRcode[i] == 1) {
-					Pnumber = Pnumber + (1 << (15 - i))
-				}
-			}
-			serial.writeLine("")
-			IRcode = []
-			readir = []
-		}
+		IR_Reading = true
 	}
 		
 }
