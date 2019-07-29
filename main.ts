@@ -173,58 +173,8 @@ namespace mooncar {
 		
 		return RdCl
 	}
-
-	// Read a IR code
-	function wait_for_signal() {
-		while (pins.analogReadPin(AnalogPin.P1) > 500) { }
-	}
-
-	function read_on() {
-		let c = 0;
-		while (pins.analogReadPin(AnalogPin.P1) < 500 && c < 500) {
-			c++;
-		}
-		return c;
-	}
-
-	function read_off() {
-		let c = 0;
-		while (pins.analogReadPin(AnalogPin.P1) > 500 && c < 500) {
-			c++;
-		}
-		return c;
-	}
-	let last_res = 0
-	function read_IR() {
-		wait_for_signal();
-		let c1 = 0;
-		let c2 = 0;
-		let res = 0;
-		while (c1 < 25 && c2 < 25) {
-			c1 = read_on();
-			c2 = read_off();
-		}
-		for (let i = 0; i < 32; i++) {
-			c1 = read_on();
-			c2 = read_off();
-			res = res + res;
-			if (c2 > 10) {
-				res = res + 1;
-			}
-		}
-		if (res > 1000000000) {
-			res = last_res
-		}
-		last_res = res
-		return res;
-	}
-
-	//%block="IR Remote"
-    export function IE_Remote(): number {
-		return read_IR();
-	}
 	
-	
+//===============================================================================================================
 	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_LO, function () {
     	readir.push(pins.pulseDuration())
 	})
@@ -239,6 +189,7 @@ namespace mooncar {
 	let Pnumber = 0
 	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
 	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+	
 	//%block="on IR message received" blockInlineInputs=true
     //%weight=70 blockGap=10
     export function onReceivedIR(): void {
@@ -284,5 +235,6 @@ namespace mooncar {
 			readir = []
 		}
     }
+	//====================================================================
 }
 
