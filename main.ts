@@ -195,7 +195,7 @@ namespace mooncar {
 	control.inBackground(function () {
 		basic.forever(function () {
 			if (Reading == true) {
-				while (readir.length < 69) {
+				if (readir.length >= 69) {
 					//serial.writeLine("len: " + readir.length)
 					for (let i = 0; i <= 10; i++) {
 						if (readir[i] > 8000 && readir[i] < 10000) {
