@@ -247,7 +247,7 @@ namespace mooncar {
 	}
 
 	//%block="IR Remote" blockInlineInputs=true
-	//% weight=80 blockGap=10
+	//%weight=80 blockGap=10
 	export function IR_Remote(add: Action): void {
 		IRREAD = add
 		Reading = true
