@@ -236,6 +236,7 @@ namespace mooncar {
 					}
 					IRcode = []
 					readir = []
+					control.waitMicros(10)
 				}
 			}
 		})
