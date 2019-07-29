@@ -196,46 +196,46 @@ namespace mooncar {
 		basic.forever(function () {
 			if (Reading == true) {
 				if (readir.length >= 69) {
-					//serial.writeLine("len: " + readir.length)
-					for (let i = 0; i <= 10; i++) {
-						if (readir[i] > 8000 && readir[i] < 10000) {
-							IRcount = 0
-							for (let check = i + 3; check <= i + 33; check++) {
-								if (check % 2 == 0) {
-									if (readir[check] > 1000) {
-										IRcount += 1
-									}
-									if (IRcount == 8) {
-										IRcount = 0
-										for (let value = check + 2; value <= check + 33; value++) {
-											if (value % 2 == 0) {
-												if (readir[value] > 1000) {
-													IRcount = 1
-												}
-												else {
-													IRcount = 0
-												}
-												IRcode.push(IRcount)
-											}
-										}
-										break
-									}
-								}
+					//serial.writeLine("L: " + readir.length)
+					for (let a = readir.length; a > 0; a--) {
+						if ((readir[a] > 30000) && (readir[a] < 45000)) {
+							for (let i = 0; i < 16; i++) {
+								a -= 2
+								IRcode[15 - i] = readir[a]
 							}
+							break
+						}
+						else if ((readir[a] > 17000) && (readir[a] < 20000)) {
+							for (let i = 0; i < 16; i++) {
+								a -= 2
+								IRcode[15 - i] = readir[a]
+							}
+							break
 						}
 					}
 					Pnumber = 0
 					for (let i = 0; i < IRcode.length; i++) {
-						if (IRcode[i] == 1) {
+						if (IRcode[i] > 1000) {
 							Pnumber = Pnumber + (1 << (15 - i))
 						}
 					}
-					//serial.writeLine("" + Pnumber)
+					//serial.writeNumber(Pnumber)
+					//serial.writeLine("")
+					/*
+					let Debug = ""
+					for (let i = 0; i < readir.length; i++) {
+						Debug = Debug + readir[i].toString() + ","
+					}
+					if (Pnumber == 0) {
+						serial.writeLine(Debug)
+						Debug = ""
+					}
+					*/
 					if (Reading) {
 						IRREAD()
 					}
-					IRcode = []
 					readir = []
+					IRcode = []
 				}
 			}
 		})
