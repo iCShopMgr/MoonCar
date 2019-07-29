@@ -174,6 +174,21 @@ namespace mooncar {
 		return RdCl
 	}
 
+	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_LO, function () {
+		readir.push(pins.pulseDuration())
+	})
+	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_HI, function () {
+		readir.push(pins.pulseDuration())
+	})
+	let IRcode: number[] = []
+	let readir: number[] = []
+	IRcode = []
+	readir = []
+	let IRcount = 0
+	let Pnumber = 0
+	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
+	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+
 	//%block="IR Remote"
     export function IR_Remote(): number {
 		if (readir.length >= 69) {
