@@ -173,27 +173,10 @@ namespace mooncar {
 		
 		return RdCl
 	}
-	
-//===============================================================================================================
-	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_LO, function () {
-    	readir.push(pins.pulseDuration())
-	})
-	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_HI, function () {
-		readir.push(pins.pulseDuration())
-	})
-	let IRcode: number[] = []
-	let readir: number[] = []
-	IRcode = []
-	readir = []
-	let IRcount = 0
-	let Pnumber = 0
-	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
-	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
-	
-	//%block="on IR message received" blockInlineInputs=true
-    //%weight=70 blockGap=10
-    export function onReceivedIR(): void {
-        if (readir.length >= 69) {
+
+	//%block="IR Remote"
+    export function IR_Remote(): number {
+		if (readir.length >= 69) {
 			//serial.writeLine("len: " + readir.length)
 			for (let i = 0; i <= 10; i++) {
 				if (readir[i] > 8000 && readir[i] < 10000) {
@@ -205,8 +188,6 @@ namespace mooncar {
 							}
 							if (IRcount == 8) {
 								IRcount = 0
-								Pnumber = 0
-
 								for (let value = check + 2; value <= check + 33; value++) {
 									if (value % 2 == 0) {
 										if (readir[value] > 1000) {
@@ -224,17 +205,19 @@ namespace mooncar {
 					}
 				}
 			}
+			Pnumber = 0
 			for (let i = 0; i < IRcode.length; i++) {
 				if (IRcode[i] == 1) {
 					Pnumber = Pnumber + (1 << (15 - i))
 				}
 			}
-			//serial.writeNumber(Pnumber)
-			//serial.writeLine("")
+			serial.writeLine("")
 			IRcode = []
 			readir = []
+			return Pnumber
 		}
-    }
-	//====================================================================
+		return 0
+	}
+		
 }
 
