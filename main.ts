@@ -227,7 +227,47 @@ namespace mooncar {
 	//%block="on IR message received" blockInlineInputs=true
     //%weight=70 blockGap=10
     export function onReceivedIR(): void {
-        
+        if (readir.length >= 69) {
+			//serial.writeLine("len: " + readir.length)
+			for (let i = 0; i <= 10; i++) {
+				if (readir[i] > 8000 && readir[i] < 10000) {
+					IRcount = 0
+					for (let check = i + 3; check <= i + 33; check++) {
+						if (check % 2 == 0) {
+							if (readir[check] > 1000) {
+								IRcount += 1
+							}
+							if (IRcount == 8) {
+								IRcount = 0
+								Pnumber = 0
+
+								for (let value = check + 2; value <= check + 33; value++) {
+									if (value % 2 == 0) {
+										if (readir[value] > 1000) {
+											IRcount = 1
+										}
+										else {
+											IRcount = 0
+										}
+										IRcode.push(IRcount)
+									}
+								}
+								break
+							}
+						}
+					}
+				}
+			}
+			for (let i = 0; i < IRcode.length; i++) {
+				if (IRcode[i] == 1) {
+					Pnumber = Pnumber + (1 << (15 - i))
+				}
+			}
+			//serial.writeNumber(Pnumber)
+			//serial.writeLine("")
+			IRcode = []
+			readir = []
+		}
     }
 }
 
