@@ -224,6 +224,21 @@ namespace mooncar {
 		return read_IR();
 	}
 	
+	
+	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_LO, function () {
+    	readir.push(pins.pulseDuration())
+	})
+	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_HI, function () {
+		readir.push(pins.pulseDuration())
+	})
+	let IRcode: number[] = []
+	let readir: number[] = []
+	IRcode = []
+	readir = []
+	let IRcount = 0
+	let Pnumber = 0
+	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
+	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
 	//%block="on IR message received" blockInlineInputs=true
     //%weight=70 blockGap=10
     export function onReceivedIR(): void {
