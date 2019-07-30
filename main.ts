@@ -174,10 +174,10 @@ namespace mooncar {
 		return RdCl
 	}
 
-	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_LO, function () {
+	pins.onPulsed(DigitalPin.P1, PulseValue.Low, function () {
 		readir.push(pins.pulseDuration())
 	})
-	control.onEvent(EventBusSource.MICROBIT_ID_IO_P1, EventBusValue.MICROBIT_PIN_EVT_PULSE_HI, function () {
+	pins.onPulsed(DigitalPin.P1, PulseValue.High, function () {
 		readir.push(pins.pulseDuration())
 	})
 	let IRcode: number[] = []
@@ -196,7 +196,7 @@ namespace mooncar {
 		basic.forever(function () {
 			if (Reading == true) {
 				if (readir.length >= 69) {
-					//serial.writeLine("L: " + readir.length)
+					// serial.writeLine("L: " + readir.length)
 					for (let a = readir.length; a > 0; a--) {
 						if ((readir[a] > 30000) && (readir[a] < 45000)) {
 							for (let i = 0; i < 16; i++) {
@@ -206,36 +206,33 @@ namespace mooncar {
 							break
 						}
 						else if ((readir[a] > 17000) && (readir[a] < 20000)) {
-							for (let i = 0; i < 16; i++) {
+							for (let j = 0; j < 16; j++) {
 								a -= 2
-								IRcode[15 - i] = readir[a]
+								IRcode[15 - j] = readir[a]
 							}
 							break
 						}
 					}
 					Pnumber = 0
-					for (let i = 0; i < IRcode.length; i++) {
-						if (IRcode[i] > 1000) {
-							Pnumber = Pnumber + (1 << (15 - i))
+					for (let k = 0; k <= IRcode.length - 1; k++) {
+						if (IRcode[k] > 1000) {
+							Pnumber = Pnumber + (1 << (15 - k))
 						}
 					}
-					//serial.writeNumber(Pnumber)
-					//serial.writeLine("")
-					/*
-					let Debug = ""
-					for (let i = 0; i < readir.length; i++) {
-						Debug = Debug + readir[i].toString() + ","
-					}
-					if (Pnumber == 0) {
-						serial.writeLine(Debug)
-						Debug = ""
-					}
-					*/
+					// serial.writeNumber(Pnumber) serial.writeLine("")
+					// let Debug = "" for (let i = 0; i < readir.length;
+					// i++) { Debug = Debug + readir[i].toString() + "," }
+					// if (Pnumber == 0) { serial.writeLine(Debug) Debug =
+					// "" }
 					if (Reading) {
 						IRREAD()
 					}
 					readir = []
 					IRcode = []
+					basic.pause(50)
+				}
+				else if (readir.length > 80) {
+					readir = []
 				}
 			}
 		})
