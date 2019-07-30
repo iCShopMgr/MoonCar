@@ -185,7 +185,6 @@ namespace mooncar {
 	
 	IRcode = []
 	readir = []
-	let IRcount = 0
 	let Pnumber = 0
 	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
 	pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
@@ -219,7 +218,8 @@ namespace mooncar {
 							Pnumber = Pnumber + (1 << (15 - k))
 						}
 					}
-					// serial.writeNumber(Pnumber) serial.writeLine("")
+					//serial.writeNumber(Pnumber) 
+					serial.writeLine("")
 					// let Debug = "" for (let i = 0; i < readir.length;
 					// i++) { Debug = Debug + readir[i].toString() + "," }
 					// if (Pnumber == 0) { serial.writeLine(Debug) Debug =
@@ -229,7 +229,7 @@ namespace mooncar {
 					}
 					readir = []
 					IRcode = []
-					basic.pause(50)
+					//basic.pause(50)
 				}
 				else if (readir.length > 80) {
 					readir = []
