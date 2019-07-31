@@ -225,7 +225,7 @@ namespace mooncar {
 					}
 					readir = []
 					IRcode = []
-					basic.pause(50)
+					serial.writeLine("")
 				}
 			}
 		})
