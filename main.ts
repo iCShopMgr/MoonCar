@@ -180,10 +180,7 @@ namespace mooncar {
 	pins.onPulsed(DigitalPin.P1, PulseValue.High, function () {
 		readir.push(pins.pulseDuration())
 	})
-	let IRcode: number[] = []
 	let readir: number[] = []
-	
-	IRcode = []
 	readir = []
 	let Pnumber = 0
 	pins.setEvents(DigitalPin.P1, PinEventType.Pulse)
@@ -194,38 +191,50 @@ namespace mooncar {
 	control.inBackground(function () {
 		basic.forever(function () {
 			if (Reading == true) {
-				if (readir.length > 67) {
-					/*
-					let Debug = ""
-					for (let i = 0; i < 68; i++) {
-						Debug = Debug + readir[i].toString() + ","
-					}
-					serial.writeLine(Debug)
-					*/
-					for (let i = 67; i > 0; i--) {
-						if (readir[i] < 1000) {
-							i += 1
-			
-							for (let j = 0; j < 16; j++) {
-								i = i - 2
-								IRcode[15 - j] = readir[i]
-							}
+				if (readir[0] > 30000) {
+					basic.pause(150)
+					let count = 0
+					let one_data = 0
+					for (let i = 0; i < readir.length; i++) {
+						if (readir[i] > 1000 && readir[i] < 2000) {
+							count += 1
+						}
+						if (count == 8) {
+							one_data = i + 2
 							break
 						}
 					}
+			
 					Pnumber = 0
 					for (let i = 0; i < 16; i++) {
-						if (IRcode[i] > 1000) {
+						if (readir[one_data] > 1000) {
 							Pnumber += (1 << (15 - i))
 						}
+						one_data += 2
 					}
-			
+					if (Pnumber == 49152) {
+						let Debug = ""
+						for (let i = 0; i < readir.length; i++) {
+							Debug += readir[i].toString() + ","
+						}
+						serial.writeLine("" + Debug)
+						serial.writeLine("ERROR")
+					}
+					/*
+					let Debug = ""
+					for (let i = 0; i < readir.length; i++) {
+						Debug += readir[i].toString() + ","
+					}
+					serial.writeLine("" + Debug)
+					serial.writeLine("" + readir.length)
+					*/
+					readir = []
 					if (Reading) {
 						IRREAD()
 					}
+				}
+				else {
 					readir = []
-					IRcode = []
-					serial.writeLine("")
 				}
 			}
 		})
