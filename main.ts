@@ -25,7 +25,7 @@ namespace mooncar {
 	}
 
 	//%block="MoonCar to move %direction |speed %movespeed |(0-100)"
-	export function MoonCar_go(direction: Direction = 1, movespeed: number): void {
+	export function MoonCarGo(direction: Direction = 1, movespeed: number): void {
 		if(movespeed > 100)movespeed = 100
 		if(movespeed < 0)movespeed = 0
 		movespeed = Math.round(Math.map(movespeed, 0, 100, 0, 1023))
@@ -50,7 +50,7 @@ namespace mooncar {
 	}
 
 	//%block="MoonCar wheel speed Left %left |Right %right |(-100-100)"
-	export function MoonCar_LR(left: number=0, right: number=0): void {
+	export function MoonCarLR(left: number=0, right: number=0): void {
 		if(left > 100)left = 100
 		if(left < -100)left = -100
 		if(right > 100)right = 100
@@ -81,7 +81,7 @@ namespace mooncar {
 
     let position = 0
 	//%block="Line Follower Sensor"
-    export function Line_Follower_Sensor(): number {
+    export function LineFollowerSensor(): number {
         if (pins.digitalReadPin(DigitalPin.P15) == 1) {
 			if (pins.digitalReadPin(DigitalPin.P16) == 1) {
 				position = 0
@@ -102,7 +102,7 @@ namespace mooncar {
 	}
 	
 	//%block="Ultrasonic Sensor"
-    export function Ultrasonic_Sensor(): number {
+    export function UltrasonicSensor(): number {
 		let distance = 0
 		pins.setPull(DigitalPin.P3, PinPullMode.PullNone);
 
@@ -117,7 +117,7 @@ namespace mooncar {
 	}
 
 	//%block="Push Bottom"
-    export function Push_Bottom(): number {
+    export function PushBottom(): number {
 		let pushvalue = pins.digitalReadPin(DigitalPin.P7)
 		if (pushvalue == 1) {
 			pushvalue = 0
@@ -129,7 +129,7 @@ namespace mooncar {
 	}
 
 	//%block="Color Sensor init"
-	export function Color_Sensor_init(): void {
+	export function ColorSensorinit(): void {
 		pins.i2cWriteNumber(41, 33276, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
 		pins.digitalWritePin(DigitalPin.P11, 0);
@@ -146,7 +146,7 @@ namespace mooncar {
 	}
 
 	//%block="Color Sensor read RGB %channel |channel"
-	export function Color_Sensor_Read(channel: Channel=1): number {
+	export function ColorSensorRead(channel: Channel=1): number {
 		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
 		//let ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
 		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
@@ -241,13 +241,13 @@ namespace mooncar {
 	})
 
 	//%block="IR Read"
-	export function IR_Read(): number {
+	export function IRRead(): number {
 		return Pnumber
 	}
 
 	//%block="IR Remote" blockInlineInputs=true
 	//%weight=80 blockGap=10
-	export function IR_Remote(add: Action): void {
+	export function IRRemote(add: Action): void {
 		IRREAD = add
 		Reading = true
 	}
