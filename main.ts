@@ -241,13 +241,61 @@ namespace mooncar {
 		return Pnumber
 	}
 
-	//%block="IR Remote" blockInlineInputs=true
+	//%block="IR Remote(NEC)" blockInlineInputs=true
 	//%weight=80 blockGap=10
 	export function IRRemote(add: Action): void {
 		IRREAD = add
 		Reading = true
 	}
-		
+
+	function IRon(d: number) {
+		let r = d;
+		while (r > 26) {
+			pins.digitalWritePin(DigitalPin.P0, 1)
+			control.waitMicros(2);
+			pins.digitalWritePin(DigitalPin.P0, 0)
+			r = r - 26;
+		}
+	}
+	
+	function IRoff(d: number) {
+		control.waitMicros(d);
+	}
+	
+	function send(code: number) {
+		for (let i = 7; i > -1; i--) {
+			if (1 << i & code) {
+				IRon(560);
+				IRoff(1600);
+			} else {
+				IRon(560);
+				IRoff(560);
+			}
+		}
+	}
+	
+	function recode(code: number): number {
+		let message = 0
+		for (let i = 7; i > -1; i--) {
+			if (!(1 << i & code)) {
+				message += (1 << i)
+			}
+		}
+		return message
+	}
+	
+	//%block="IR Send(NEC) %irnumber|(0-255)"
+	function IRcommand(irnumber: number) {
+		let irnumber2 = recode(irnumber)
+		IRon(8500);
+		IRoff(4500);
+		send(0);
+		send(255);
+		send(irnumber);
+		send(irnumber2);
+		IRon(560);
+		IRoff(4500);
+	}
 }
 
 
