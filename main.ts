@@ -251,9 +251,9 @@ namespace mooncar {
 	function IRon(d: number) {
 		let r = d;
 		while (r > 26) {
-			pins.digitalWritePin(DigitalPin.P0, 1)
+			pins.digitalWritePin(DigitalPin.P6, 1)
 			control.waitMicros(2);
-			pins.digitalWritePin(DigitalPin.P0, 0)
+			pins.digitalWritePin(DigitalPin.P6, 0)
 			r = r - 26;
 		}
 	}
