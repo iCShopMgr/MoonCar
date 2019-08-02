@@ -285,7 +285,7 @@ namespace mooncar {
 	}
 	
 	//%block="IR Send(NEC) %irnumber|(0-255)"
-	function IRcommand(irnumber: number) {
+	export function IRcommand(irnumber: number) :void{
 		let irnumber2 = recode(irnumber)
 		IRon(8500);
 		IRoff(4500);
