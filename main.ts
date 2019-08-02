@@ -51,10 +51,8 @@ namespace mooncar {
 
 	//%block="MoonCar wheel speed Left %left |Right %right |(-100-100)"
 	export function MoonCarLR(left: number=0, right: number=0): void {
-		if(left > 100)left = 100
-		if(left < -100)left = -100
-		if(right > 100)right = 100
-		if(right < -100)right = -100
+		Math.constrain(left, -100, 100)
+		Math.constrain(right, -100, 100)
 		if (left > 0) {
 			left = Math.round(Math.map(left, 0, 100, 0, 1023))
 			pins.analogWritePin(AnalogPin.P2, left)
@@ -192,7 +190,7 @@ namespace mooncar {
 		basic.forever(function () {
 			if (Reading == true) {
 				if (readir[0] > 30000) {
-					basic.pause(150)
+					basic.pause(100)
 					let count = 0
 					let one_data = 0
 					for (let i = 0; i < readir.length; i++) {
@@ -206,27 +204,25 @@ namespace mooncar {
 					}
 			
 					Pnumber = 0
-					for (let i = 0; i < 16; i++) {
+					for (let i = 0; i < 8; i++) {
 						if (readir[one_data] > 1000) {
-							Pnumber += (1 << (15 - i))
+							Pnumber += (1 << (7 - i))
 						}
 						one_data += 2
 					}
-					if (Pnumber == 49152) {
-						let Debug = ""
-						for (let i = 0; i < readir.length; i++) {
-							Debug += readir[i].toString() + ","
-						}
-						serial.writeLine("" + Debug)
-						serial.writeLine("ERROR")
-					}
+					basic.pause(50)
 					/*
-					let Debug = ""
-					for (let i = 0; i < readir.length; i++) {
-						Debug += readir[i].toString() + ","
+					if (Pnumber == 192) {
+						for (let i = 0; i < readir.length; i++) {
+							if (i % 2 != 0) {
+								serial.writeLine("," + readir[i] + ",")
+							}
+							else {
+								serial.writeNumber(readir[i])
+							}
+						}
+						serial.writeLine("==========")
 					}
-					serial.writeLine("" + Debug)
-					serial.writeLine("" + readir.length)
 					*/
 					readir = []
 					if (Reading) {
