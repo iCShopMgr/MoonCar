@@ -173,7 +173,7 @@ namespace mooncar {
 	}
 
 	//%block="Enable IR"
-	export function EnIR(irnumber: number) :void{
+	export function EnIR() :void{
 		pins.onPulsed(DigitalPin.P1, PulseValue.Low, function () {
 			readir.push(pins.pulseDuration())
 		})
