@@ -11,5 +11,8 @@
         "main.ts"
         "_locales/zh/mooncar-strings.json"
     ],
+    "testFiles": [
+        "tests.ts"
+    ],
     "public": true
 }
