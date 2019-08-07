@@ -5,7 +5,7 @@
     "mooncar.Direction.direct4|block": "右轉",
     "mooncar.Direction.direct5|block": "停止",
     "mooncar.MoonCarGo|block": "登月小車 %direction|速度 %movespeed|(0-100)",
-    "mooncar.MoonCarLR|block": "登月小車-左輪速度 %left|右輪速度 %right|(-100-100)",
+    "mooncar.MoonCarLR|block": "登月小車 左輪速度 %left|右輪速度 %right|(-100-100)",
     "mooncar.LineFollowerSensor|block": "循跡感測器",
     "mooncar.UltrasonicSensor|block": "超音波距離感測器",
     "mooncar.PushBottom|block": "按鍵",
