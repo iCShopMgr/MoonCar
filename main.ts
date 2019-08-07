@@ -24,7 +24,7 @@ namespace mooncar {
 		direct5 = 5
 	}
 
-	//%block="MoonCar to move %direction |speed %movespeed |(0-100)"
+	//%block="MoonCar to move %direction |speed %movespeed |(0~100)"
 	export function MoonCarGo(direction: Direction = 1, movespeed: number): void {
 		if(movespeed > 100)movespeed = 100
 		if(movespeed < 0)movespeed = 0
@@ -49,7 +49,7 @@ namespace mooncar {
 		}
 	}
 
-	//%block="MoonCar wheel speed Left %left |Right %right |(-100-100)"
+	//%block="MoonCar wheel speed Left %left |Right %right |(-100~100)"
 	export function MoonCarLR(left: number=0, right: number=0): void {
 		Math.constrain(left, -100, 100)
 		Math.constrain(right, -100, 100)
@@ -275,7 +275,7 @@ namespace mooncar {
 		return message
 	}
 	
-	//%block="IR Send(NEC) %irnumber|(0-255)"
+	//%block="IR Send(NEC) %irnumber|(0~255)"
 	export function IRcommand(irnumber: number) :void{
 		let irnumber2 = recode(irnumber)
 		IRon(8500);

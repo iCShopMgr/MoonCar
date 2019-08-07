@@ -1,7 +1,7 @@
 {
-    "name": "MoonCar",
+    "name": "mooncar",
     "version": "1.0",
-    "description": "MoonCar",
+    "description": "MoonCar package",
     "license": "MIT",
     "dependencies": {
         "NeoPixel": "github:microsoft/pxt-neopixel"
@@ -10,9 +10,6 @@
         "README.md",
         "main.ts",
         "_locales/zh/mooncar-strings.json"
-    ],
-    "testFiles": [
-        "tests.ts"
     ],
     "public": true
 }
