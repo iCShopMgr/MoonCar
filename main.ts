@@ -55,25 +55,25 @@ namespace mooncar {
 		Math.constrain(right, -100, 100)
 		if (left > 0) {
 			left = Math.round(Math.map(left, 0, 100, 0, 1023))
-			pins.analogWritePin(AnalogPin.P2, left)
-        	pins.analogWritePin(AnalogPin.P13, 0)	
+			pins.analogWritePin(AnalogPin.P8, left)
+        	pins.analogWritePin(AnalogPin.P14, 0)	
 		}
 		else {
 			left = left * -1
 			left = Math.round(Math.map(left, 0, 100, 0, 1023))
-			pins.analogWritePin(AnalogPin.P2, 0)
-        	pins.analogWritePin(AnalogPin.P13, left)
+			pins.analogWritePin(AnalogPin.P8, 0)
+        	pins.analogWritePin(AnalogPin.P14, left)
 		}
 		if (right > 0) {
 			right = Math.round(Math.map(right, 0, 100, 0, 1023))
-			pins.analogWritePin(AnalogPin.P8, right)
-			pins.analogWritePin(AnalogPin.P14, 0)	
+			pins.analogWritePin(AnalogPin.P2, right)
+			pins.analogWritePin(AnalogPin.P13, 0)	
 		}
 		else {
 			right = right * -1
 			right = Math.round(Math.map(right, 0, 100, 0, 1023))
-			pins.analogWritePin(AnalogPin.P8, 0)
-        	pins.analogWritePin(AnalogPin.P14, right)
+			pins.analogWritePin(AnalogPin.P2, 0)
+        	pins.analogWritePin(AnalogPin.P13, right)
 		}
 	}
 
