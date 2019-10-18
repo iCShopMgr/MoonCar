@@ -24,6 +24,7 @@
     "mooncar.ColorPart.Purple|block": "紫色",
     "mooncar.ColorSensorRecord|block": "顏色感測器紀錄 %colorpart |數值",
     "mooncar.ReadColorEqual|block": "讀取顏色等於 %colorpart",
+    "mooncar.RunInBackgroundF|block": "背景重複執行",
     "mooncar.EnIR|block": "紅外線遙控器初始化",
     "mooncar.IRRead|block": "紅外線讀取的訊息",
     "mooncar.IRRemote|block": "當接收到紅外線遙控器訊息(NEC)時",
