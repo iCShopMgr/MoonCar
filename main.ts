@@ -312,6 +312,16 @@ namespace mooncar {
 		}
 	}
 	
+	//%block="Run in background(forever)" blockInlineInputs=true
+	//%weight=80 blockGap=10
+	export function RunInBackgroundF(add: Action): void {
+		control.inBackground(function () {
+			basic.forever(function () {
+				
+			})
+		})
+	}
+	
 	//=============================================================================
 
 	//%block="Enable IR"
