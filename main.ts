@@ -136,11 +136,11 @@ namespace mooncar {
 
 	export enum Channel {
 		//% block="R"
-		channel1 = 1,
+		Red = 1,
 		//% block="G"
-		channel2 = 2,
+		Green = 2,
 		//% block="B"
-		channel3 = 3
+		Blue = 3
 	}
 
 	//%block="Color Sensor read RGB %channel |channel"
@@ -171,6 +171,147 @@ namespace mooncar {
 		
 		return RdCl
 	}
+	//=============================================================================
+	let nowReadColor = [0, 0, 0]
+	//%block="Color Sensor read color"
+	export function ColorSensorReadColor(): void {
+		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
+		//let ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
+		//let State = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 182, NumberFormat.Int8LE, true)
+		let TCS_RED = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 184, NumberFormat.Int8LE, true)
+		let TCS_GREEN = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 186, NumberFormat.Int8LE, true)
+		let TCS_BLUE = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		TCS_RED = Math.round(Math.map(TCS_RED, 0, 65535, 0, 1023))
+		TCS_GREEN =  Math.round(Math.map(TCS_GREEN, 0, 65535, 0, 1023))
+		TCS_BLUE = Math.round(Math.map(TCS_BLUE, 0, 65535, 0, 1023))
+		nowReadColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+	}
+	
+	export enum ColorPart {
+		//% block="Red"
+		Red = 1,
+		//% block="Green"
+		Green = 2,
+		//% block="Blue"
+		Blue = 3,
+		//% block="Yellow"
+		Yellow = 4,
+		//% block="Azure"
+		Azure = 5,
+		//% block="Purple"
+		Purple = 6
+	}
+	
+	let ReadRedColor = [0, 0, 0]
+	let ReadGreenColor = [0, 0, 0]
+	let ReadBlueColor = [0, 0, 0]
+	let ReadYellowColor = [0, 0, 0]
+	let ReadAzureColor = [0, 0, 0]
+	let ReadPurpleColor = [0, 0, 0]
+	
+	//%block="Color Sensor record %colorpart |color"
+	export function ColorSensorRecord(colorpart: ColorPart=1): void {
+		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
+		//let ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
+		//let State = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 182, NumberFormat.Int8LE, true)
+		let TCS_RED = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 184, NumberFormat.Int8LE, true)
+		let TCS_GREEN = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		pins.i2cWriteNumber(41, 186, NumberFormat.Int8LE, true)
+		let TCS_BLUE = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
+		TCS_RED = Math.round(Math.map(TCS_RED, 0, 65535, 0, 1023))
+		TCS_GREEN =  Math.round(Math.map(TCS_GREEN, 0, 65535, 0, 1023))
+		TCS_BLUE = Math.round(Math.map(TCS_BLUE, 0, 65535, 0, 1023))
+		switch(colorpart) {
+			case 1:
+				ReadRedColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 2:
+				ReadGreenColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 3:
+				ReadBlueColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 4:
+				ReadYellowColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 5:
+				ReadAzureColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 6:
+				ReadPurpleColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+		}
+	}
+	
+	let colorright = false
+	//%block="Read color equal %colorpart |color?"
+    export function ReadColorEqual(colorpart: ColorPart=1): boolean {
+		switch(colorpart) {
+			case 1:
+				if ((Math.abs(ReadRedColor[0]-nowReadColor[0])<100) && (Math.abs(ReadRedColor[1]-nowReadColor[1])<100) && (Math.abs(ReadRedColor[2]-nowReadColor[2])<100)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 2:
+				if ((Math.abs(ReadGreenColor[0]-nowReadColor[0])<100) && (Math.abs(ReadGreenColor[1]-nowReadColor[1])<100) && (Math.abs(ReadGreenColor[2]-nowReadColor[2])<100)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 3:
+				if ((Math.abs(ReadBlueColor[0]-nowReadColor[0])<100) && (Math.abs(ReadBlueColor[1]-nowReadColor[1])<100) && (Math.abs(ReadBlueColor[2]-nowReadColor[2])<100)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 4:
+				if ((Math.abs(ReadYellowColor[0]-nowReadColor[0])<100) && (Math.abs(ReadYellowColor[1]-nowReadColor[1])<100) && (Math.abs(ReadYellowColor[2]-nowReadColor[2])<100)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 5:
+				if ((Math.abs(ReadAzureColor[0]-nowReadColor[0])<100) && (Math.abs(ReadAzureColor[1]-nowReadColor[1])<100) && (Math.abs(ReadAzureColor[2]-nowReadColor[2])<100)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 6:
+				if ((Math.abs(ReadPurpleColor[0]-nowReadColor[0])<100) && (Math.abs(ReadPurpleColor[1]-nowReadColor[1])<100) && (Math.abs(ReadPurpleColor[2]-nowReadColor[2])<100)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+		}
+		if (colorright == true) {
+			return true
+		}
+		else {
+			return false
+		}
+	}
+	
+	//=============================================================================
 
 	//%block="Enable IR"
 	export function EnIR() :void{
