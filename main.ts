@@ -251,11 +251,12 @@ namespace mooncar {
 	}
 	
 	let colorright = false
+	let forkrange = 50
 	//%block="Read color equal %colorpart |color?"
     export function ReadColorEqual(colorpart: ColorPart=1): boolean {
 		switch(colorpart) {
 			case 1:
-				if ((Math.abs(ReadRedColor[0]-nowReadColor[0])<100) && (Math.abs(ReadRedColor[1]-nowReadColor[1])<100) && (Math.abs(ReadRedColor[2]-nowReadColor[2])<100)) {
+				if ((Math.abs(ReadRedColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadRedColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadRedColor[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
@@ -263,7 +264,7 @@ namespace mooncar {
 				}
 				break;
 			case 2:
-				if ((Math.abs(ReadGreenColor[0]-nowReadColor[0])<100) && (Math.abs(ReadGreenColor[1]-nowReadColor[1])<100) && (Math.abs(ReadGreenColor[2]-nowReadColor[2])<100)) {
+				if ((Math.abs(ReadGreenColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadGreenColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadGreenColor[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
@@ -271,7 +272,7 @@ namespace mooncar {
 				}
 				break;
 			case 3:
-				if ((Math.abs(ReadBlueColor[0]-nowReadColor[0])<100) && (Math.abs(ReadBlueColor[1]-nowReadColor[1])<100) && (Math.abs(ReadBlueColor[2]-nowReadColor[2])<100)) {
+				if ((Math.abs(ReadBlueColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadBlueColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadBlueColor[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
@@ -279,7 +280,7 @@ namespace mooncar {
 				}
 				break;
 			case 4:
-				if ((Math.abs(ReadYellowColor[0]-nowReadColor[0])<100) && (Math.abs(ReadYellowColor[1]-nowReadColor[1])<100) && (Math.abs(ReadYellowColor[2]-nowReadColor[2])<100)) {
+				if ((Math.abs(ReadYellowColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadYellowColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadYellowColor[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
@@ -287,7 +288,7 @@ namespace mooncar {
 				}
 				break;
 			case 5:
-				if ((Math.abs(ReadAzureColor[0]-nowReadColor[0])<100) && (Math.abs(ReadAzureColor[1]-nowReadColor[1])<100) && (Math.abs(ReadAzureColor[2]-nowReadColor[2])<100)) {
+				if ((Math.abs(ReadAzureColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadAzureColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadAzureColor[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
@@ -295,7 +296,7 @@ namespace mooncar {
 				}
 				break;
 			case 6:
-				if ((Math.abs(ReadPurpleColor[0]-nowReadColor[0])<100) && (Math.abs(ReadPurpleColor[1]-nowReadColor[1])<100) && (Math.abs(ReadPurpleColor[2]-nowReadColor[2])<100)) {
+				if ((Math.abs(ReadPurpleColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadPurpleColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadPurpleColor[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
