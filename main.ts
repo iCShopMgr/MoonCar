@@ -338,7 +338,7 @@ namespace mooncar {
 					colorright = false
 				}
 				break;
-			case 7:
+			case 9:
 				if ((Math.abs(ReadCustom3Color[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadCustom3Color[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadCustom3Color[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
