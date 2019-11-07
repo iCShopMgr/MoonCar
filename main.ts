@@ -132,6 +132,7 @@ namespace mooncar {
 		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
 		pins.digitalWritePin(DigitalPin.P11, 0);
 		basic.pause(10)
+		let dropout = pins.digitalReadPin(DigitalPin.P11)
 	}
 
 	export enum Channel {
@@ -203,7 +204,13 @@ namespace mooncar {
 		//% block="Azure"
 		Azure = 5,
 		//% block="Purple"
-		Purple = 6
+		Purple = 6,
+		//% block="Custom1"
+		Custom1 = 7,
+		//% block="Custom2"
+		Custom2 = 8,
+		//% block="Custom3"
+		Custom3 = 9
 	}
 	
 	let ReadRedColor = [0, 0, 0]
@@ -212,6 +219,9 @@ namespace mooncar {
 	let ReadYellowColor = [0, 0, 0]
 	let ReadAzureColor = [0, 0, 0]
 	let ReadPurpleColor = [0, 0, 0]
+	let ReadCustom1Color = [0, 0, 0]
+	let ReadCustom2Color = [0, 0, 0]
+	let ReadCustom3Color = [0, 0, 0]
 	
 	//%block="Color Sensor record %colorpart |color"
 	export function ColorSensorRecord(colorpart: ColorPart=1): void {
@@ -246,6 +256,15 @@ namespace mooncar {
 				break;
 			case 6:
 				ReadPurpleColor = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 7:
+				ReadCustom1Color = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 8:
+				ReadCustom2Color = [TCS_RED, TCS_GREEN, TCS_BLUE]
+				break;
+			case 9:
+				ReadCustom3Color = [TCS_RED, TCS_GREEN, TCS_BLUE]
 				break;
 		}
 	}
@@ -297,6 +316,30 @@ namespace mooncar {
 				break;
 			case 6:
 				if ((Math.abs(ReadPurpleColor[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadPurpleColor[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadPurpleColor[2]-nowReadColor[2])<forkrange)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 7:
+				if ((Math.abs(ReadCustom1Color[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadCustom1Color[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadCustom1Color[2]-nowReadColor[2])<forkrange)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 8:
+				if ((Math.abs(ReadCustom2Color[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadCustom2Color[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadCustom2Color[2]-nowReadColor[2])<forkrange)) {
+					colorright = true
+				}
+				else {
+					colorright = false
+				}
+				break;
+			case 7:
+				if ((Math.abs(ReadCustom3Color[0]-nowReadColor[0])<forkrange) && (Math.abs(ReadCustom3Color[1]-nowReadColor[1])<forkrange) && (Math.abs(ReadCustom3Color[2]-nowReadColor[2])<forkrange)) {
 					colorright = true
 				}
 				else {
