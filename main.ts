@@ -134,6 +134,27 @@ namespace mooncar {
 		basic.pause(10)
 		let dropout = pins.digitalReadPin(DigitalPin.P11)
 	}
+	
+	export enum Switch {
+		//% block="ON"
+		Open = 1,
+		//% block="OFF"
+		Close = 2
+	}
+	
+	//%block="Fill Light %switch_"
+	export function Filllight(switch_: Switch=1): void {
+		if (switch_ == 1) {
+			pins.digitalWritePin(DigitalPin.P11, 0);
+			basic.pause(10)
+			let dropout = pins.digitalReadPin(DigitalPin.P11)
+		}
+		else {
+			pins.digitalWritePin(DigitalPin.P11, 1);
+			basic.pause(10)
+			let dropout = pins.digitalReadPin(DigitalPin.P11)
+		}
+	}
 
 	export enum Channel {
 		//% block="R"
