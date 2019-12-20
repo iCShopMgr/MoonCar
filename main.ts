@@ -151,8 +151,6 @@ namespace mooncar {
 		}
 		else {
 			pins.digitalWritePin(DigitalPin.P11, 1);
-			basic.pause(10)
-			let dropout = pins.digitalReadPin(DigitalPin.P11)
 		}
 	}
 
