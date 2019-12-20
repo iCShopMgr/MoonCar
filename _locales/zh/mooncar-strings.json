@@ -13,7 +13,7 @@
     "mooncar.ColorSensorinit|block": "顏色感測器初始化",
     "mooncar.Switch.Open|block": "開啟",
     "mooncar.Switch.Close|block": "關閉",
-    "monncar.Filllight|block": "補光燈 %switch_",
+    "mooncar.Filllight|block": "補光燈 %switch_",
     "mooncar.Channel.Red|block": "紅色",
     "mooncar.Channel.Green|block": "綠色",
     "mooncar.Channel.Blue|block": "藍色",
