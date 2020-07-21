@@ -10,7 +10,8 @@
         "README.md",
         "main.ts",
         "neopixel.ts",
-        "_locales/zh/mooncar-strings.json"
+        "_locales/zh/mooncar-strings.json",
+        "_locales/zh/neopixel-strings.json"
     ],
     "public": true
 }
