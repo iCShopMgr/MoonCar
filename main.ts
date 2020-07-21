@@ -492,6 +492,37 @@ namespace mooncar {
 		IRon(560);
 		IRoff(4500);
 	}
+
+  export enum NeoPixelColors {
+    //% block=red
+    Red = 0xFF0000,
+    //% block=orange
+    Orange = 0xFFA500,
+    //% block=yellow
+    Yellow = 0xFFFF00,
+    //% block=green
+    Green = 0x00FF00,
+    //% block=blue
+    Blue = 0x0000FF,
+    //% block=indigo
+    Indigo = 0x4b0082,
+    //% block=violet
+    Violet = 0x8a2be2,
+    //% block=purple
+    Purple = 0xFF00FF,
+    //% block=white
+    White = 0xFFFFFF,
+    //% block=black
+    Black = 0x000000
+  }
+
+  function packRGB(a: number, b: number, c: number): number {
+    return ((a & 0xFF) << 16) | ((b & 0xFF) << 8) | (c & 0xFF);
+  }
+  //%block="red %red|green %green|blue %blue"
+  export function rgb(red: number, green: number, blue: number): number {
+    return packRGB(red, green, blue);
+  }
 }
 
 
