@@ -617,6 +617,19 @@ namespace mooncar {
     }
 
     /**
+     * Converts red, green, blue channels into a RGB color
+     * @param red value of the red channel between 0 and 255. eg: 255
+     * @param green value of the green channel between 0 and 255. eg: 255
+     * @param blue value of the blue channel between 0 and 255. eg: 255
+     */
+    //% weight=1
+    //% blockId="neopixel_rgb" block="red %red|green %green|blue %blue"
+    //% advanced=true
+    export function rgb(red: number, green: number, blue: number): number {
+        return packRGB(red, green, blue);
+    }
+    
+    /**
      * Displays a vertical bar graph based on the `value` and `high` value.
      * If `high` is 0, the chart gets adjusted automatically.
      * @param value current value to plot
@@ -647,7 +660,7 @@ namespace mooncar {
             for (let i = 0; i < n; ++i) {
                 if (i <= v) {
                     const b = Math.idiv(i * 255, n1);
-                    this.setPixelColor(i, neopixel.rgb(b, 0, 255 - b));
+                    this.setPixelColor(i, rgb(b, 0, 255 - b));
                 }
                 else this.setPixelColor(i, 0);
             }
@@ -1041,5 +1054,10 @@ namespace mooncar {
     let g = g$ + m;
     let b = b$ + m;
     return packRGB(r, g, b);
+  }
+  export enum HueInterpolationDirection {
+    Clockwise,
+    CounterClockwise,
+    Shortest
   }
 }
