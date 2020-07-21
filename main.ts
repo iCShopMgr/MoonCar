@@ -396,7 +396,7 @@ namespace mooncar {
 	let IRREAD: Action;
 	let Reading = false
 	control.inBackground(function () {
-		basic.forever(function () {
+		while(true) {
 			if (Reading == true) {
 				if (readir[0] > 30000) {
 					basic.pause(100)
@@ -429,7 +429,8 @@ namespace mooncar {
 					readir = []
 				}
 			}
-		})
+			basic.pause(1)
+		}
 	})
 
 	//%block="IR Read"
