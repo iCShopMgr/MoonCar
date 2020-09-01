@@ -105,7 +105,8 @@ namespace mooncar {
 		pins.setPull(DigitalPin.P3, PinPullMode.PullNone);
 
 		pins.digitalWritePin(DigitalPin.P3, 0);
-		control.waitMicros(2);
+		//control.waitMicros(2);
+	    	control.waitMicros(5);
 		pins.digitalWritePin(DigitalPin.P3, 1);
 		control.waitMicros(10)
 		pins.digitalWritePin(DigitalPin.P3, 0);
