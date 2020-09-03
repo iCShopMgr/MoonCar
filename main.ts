@@ -101,6 +101,7 @@ namespace mooncar {
 
 	//% block="Ultrasonic Sensor"
     export function UltrasonicSensor(): number {
+		led.enable(false)
 		let distance = 0
 		pins.setPull(DigitalPin.P3, PinPullMode.PullNone);
 
