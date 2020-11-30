@@ -147,11 +147,13 @@ namespace mooncar {
 	//% block="Fill Light %switch_"
 	export function Filllight(switch_: Switch=1): void {
 		if (switch_ == 1) {
+			pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
 			pins.digitalWritePin(DigitalPin.P11, 0);
 			basic.pause(10)
 			let dropout = pins.digitalReadPin(DigitalPin.P11)
 		}
 		else {
+			pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
 			pins.digitalWritePin(DigitalPin.P11, 1);
 		}
 	}
