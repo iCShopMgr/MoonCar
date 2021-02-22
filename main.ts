@@ -163,14 +163,13 @@ namespace mooncar {
 		//% block="B"
 		Blue = 3
 	}
-    let ID = 0;
-    let State = 0;
+
 	//% block="Color Sensor read RGB %channel |channel"
 	export function ColorSensorRead(channel: Channel=1): number {
-		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
-		ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
-		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
-		State = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, false)
+
+		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, false)
+
 		pins.i2cWriteNumber(41, 182, NumberFormat.Int8LE, true)
 		let TCS_RED = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 184, NumberFormat.Int8LE, true)
@@ -197,10 +196,10 @@ namespace mooncar {
 	let nowReadColor = [0, 0, 0]
 	//% block="Color Sensor read color"
 	export function ColorSensorReadColor(): void {
-		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
-		ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
-		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
-		State = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, false)
+
+		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, false)
+
 		pins.i2cWriteNumber(41, 182, NumberFormat.Int8LE, true)
 		let TCS_RED = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 184, NumberFormat.Int8LE, true)
@@ -246,10 +245,10 @@ namespace mooncar {
 
 	//% block="Color Sensor record %colorpart |color"
 	export function ColorSensorRecord(colorpart: ColorPart=1): void {
-		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, true)
-		ID = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
-		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, true)
-		State = pins.i2cReadNumber(41, NumberFormat.Int8BE, false)
+		pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, false)
+
+		pins.i2cWriteNumber(41, 179, NumberFormat.Int8LE, false)
+
 		pins.i2cWriteNumber(41, 182, NumberFormat.Int8LE, true)
 		let TCS_RED = pins.i2cReadNumber(41, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 184, NumberFormat.Int8LE, true)
