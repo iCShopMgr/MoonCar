@@ -132,9 +132,6 @@ namespace mooncar {
 	export function ColorSensorinit(): void {
 		pins.i2cWriteNumber(41, 33276, NumberFormat.UInt16BE, false)
 		pins.i2cWriteNumber(41, 32771, NumberFormat.UInt16BE, false)
-		pins.digitalWritePin(DigitalPin.P11, 0);
-		basic.pause(10)
-		let dropout = pins.digitalReadPin(DigitalPin.P11)
 	}
 
 	export enum Switch {
