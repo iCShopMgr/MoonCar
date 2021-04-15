@@ -4,7 +4,7 @@
     "description": "MoonCar package",
     "license": "MIT",
     "dependencies": {
-        "NeoPixel": "github:iCShopMgr/pxt-neopixel-microsoft"
+        "NeoPixel": "https://github.com/iCShopMgr/pxt-neopixel-microsoft"
     },
     "files": [
         "README.md",
