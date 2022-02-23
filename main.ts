@@ -292,7 +292,7 @@ namespace mooncar {
     }
 
     let colorright = false
-    let forkrange = 30
+    let forkrange = 10
     //% block="Read color equal %colorpart |color?"
     export function ReadColorEqual(colorpart: ColorPart = 1): boolean {
         switch (colorpart) {
