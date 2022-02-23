@@ -7,8 +7,8 @@
     "mooncar.Direction.direct5|block": "停止",
     "mooncar.MoonCarGo|block": "登月小車 %direction |速度 %movespeed |(0~100)",
     "mooncar.MoonCarLR|block": "登月小車 左輪速度 %left |右輪速度 %right |(-100~100)",
-    "mooncar.LineFollowerSensor|block": "循跡感測器",
-    "mooncar.UltrasonicSensor|block": "超音波距離感測器",
+    "mooncar.LineFollowerSensor|block": "循跡感測器數值",
+    "mooncar.UltrasonicSensor|block": "超音波距離感測器數值",
     "mooncar.PushBottom|block": "按鍵",
     "mooncar.ColorSensorinit|block": "顏色感測器初始化",
     "mooncar.Switch.Open|block": "開啟",
@@ -30,9 +30,9 @@
     "mooncar.ColorPart.Custom3|block": "自定3",
     "mooncar.ColorSensorRecord|block": "顏色感測器紀錄 %colorpart |數值",
     "mooncar.ReadColorEqual|block": "讀取顏色等於 %colorpart",
-    "mooncar.EnIR|block": "紅外線遙控器初始化",
+    "mooncar.EnIR|block": "紅外線遙控器接收初始化",
     "mooncar.IRRead|block": "紅外線讀取的訊息",
     "mooncar.IRRemote|block": "當接收到紅外線遙控器訊息(NEC)時",
-    "mooncar.IRcommand|block": "發射紅外線訊息(NEC) %irnumber|(0~255)"
+    "mooncar.IRcommand|block": "發射紅外線訊息(NEC) %irnumber"
 }
 
