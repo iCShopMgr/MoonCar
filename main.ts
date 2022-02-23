@@ -407,7 +407,7 @@ namespace mooncar {
     control.inBackground(function () {
         while (true) {
             if (Reading == true) {
-                if (readir[0] > 4000 /*&& readir[0] < 5000*/) {
+                if (readir[0] > 4000 && readir[0] < 5000) {
                     basic.pause(100)
                     let one_data = 0
                     for (let i = 0; i < readir.length; i++) {
