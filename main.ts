@@ -574,7 +574,7 @@ namespace mooncar {
         let r = (rgb >> 16) * (_brightness / 255);
         let g = ((rgb >> 8) & 0xFF) * (_brightness / 255);
         let b = ((rgb) & 0xFF) * (_brightness / 255);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 8; i++) {
             neopixel_buf[i * 3 + 0] = Math.round(g)
             neopixel_buf[i * 3 + 1] = Math.round(r)
             neopixel_buf[i * 3 + 2] = Math.round(b)
