@@ -24,6 +24,7 @@ namespace mooncar {
         direct5 = 5
     }
 
+	//% weight=16
     //% block="MoonCar to move %direction |speed %movespeed |(0~100)"
     export function MoonCarGo(direction: Direction = 1, movespeed: number): void {
         if (movespeed > 100) movespeed = 100
@@ -49,6 +50,7 @@ namespace mooncar {
         }
     }
 
+	//% weight=16
     //% block="MoonCar wheel speed Left %left |Right %right |(-100~100)"
     export function MoonCarLR(left: number = 0, right: number = 0): void {
         Math.constrain(left, -100, 100)
@@ -78,6 +80,7 @@ namespace mooncar {
     }
 
     let position = 0
+	//% weight=15
     //% block="Line Follower Sensor"
     export function LineFollowerSensor(): number {
         if (pins.digitalReadPin(DigitalPin.P15) == 1) {
@@ -99,6 +102,7 @@ namespace mooncar {
         return position
     }
 
+	//% weight=14
     //% block="Ultrasonic Sensor"
     export function UltrasonicSensor(): number {
         led.enable(false)
@@ -115,7 +119,8 @@ namespace mooncar {
         distance = pins.pulseIn(DigitalPin.P9, PulseValue.High)
         return distance = Math.round(distance / 2 / 29)
     }
-
+	
+	//% weight=13
     //% block="Push Bottom"
     export function PushBottom(): number {
         let pushvalue = pins.digitalReadPin(DigitalPin.P7)
@@ -127,7 +132,12 @@ namespace mooncar {
         }
         return pushvalue
     }
-
+	
+	/*
+     * Color Senser
+    */
+	
+	//% weight=12
     //% block="Color Sensor init"
     export function ColorSensorinit(): void {
         pins.i2cWriteNumber(41, 33276, NumberFormat.UInt16BE, false)
@@ -140,7 +150,8 @@ namespace mooncar {
         //% block="OFF"
         Close = 2
     }
-
+	
+	//% weight=12
     //% block="Fill Light %switch_"
     export function Filllight(switch_: Switch = 1): void {
         if (switch_ == 1) {
@@ -164,6 +175,7 @@ namespace mooncar {
         Blue = 3
     }
 
+	//% weight=12
     //% block="Color Sensor read RGB %channel |channel"
     export function ColorSensorRead(channel: Channel = 1): number {
         pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, false)
@@ -192,10 +204,9 @@ namespace mooncar {
 
         return RdCl
     }
-    /*
-     * Color Senser
-    */
+    
     let nowReadColor = [0, 0, 0]
+	//% weight=12
     //% block="Color Sensor read color"
     export function ColorSensorReadColor(): void {
         pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, false)
@@ -245,6 +256,7 @@ namespace mooncar {
     let ReadCustom2Color = [0, 0, 0]
     let ReadCustom3Color = [0, 0, 0]
 
+	//% weight=12
     //% block="Color Sensor record %colorpart |color"
     export function ColorSensorRecord(colorpart: ColorPart = 1): void {
         pins.i2cWriteNumber(41, 178, NumberFormat.Int8LE, false)
@@ -293,6 +305,7 @@ namespace mooncar {
 
     let colorright = false
     let forkrange = 10
+	//% weight=12
     //% block="Read color equal %colorpart |color?"
     export function ReadColorEqual(colorpart: ColorPart = 1): boolean {
         switch (colorpart) {
@@ -381,7 +394,7 @@ namespace mooncar {
     /*
      * IR Remote
     */
-
+	//% weight=11
     //% block="Enable IR"
     export function EnIR(): void {
         pins.onPulsed(DigitalPin.P1, PulseValue.Low, function () {
@@ -481,17 +494,18 @@ namespace mooncar {
             basic.pause(1)
         }
     })
-
-    //% block="IR Read"
-    export function IRRead(): string {
-        return Pnumber
-    }
-
+	
     //% block="IR Remote(NEC)" blockInlineInputs=true
-    //% weight=80 blockGap=10
+    //% weight=11 blockGap=10
     export function IRRemote(add: Action): void {
         IRREAD = add
         Reading = true
+    }
+	
+	//% weight=11
+    //% block="IR Read"
+    export function IRRead(): string {
+        return Pnumber
     }
 
     function IRon(d: number) {
@@ -520,7 +534,7 @@ namespace mooncar {
         }
     }
     
-
+	//% weight=11
     //% block="IR Send(NEC) %irnumber"
     export function IRcommand(irstring: string): void {
         let codeH = 0
@@ -569,7 +583,7 @@ namespace mooncar {
         rgb_led_clear();
     }
 	
-	//% weight=4
+	//% weight=10
     //% rgb.shadow="colorNumberPicker"
     //%  blockId="RGB_LED_show_all" block="All RGB LED show color|%rgb"
     export function rgb_led_show_all(rgb: number): void{
@@ -584,7 +598,7 @@ namespace mooncar {
         ws2812b.sendBuffer(neopixel_buf, DigitalPin.P12)
     }
 	
-	//% weight=5
+	//% weight=10
     //% index.min=0 index.max=7
     //% rgb.shadow="colorNumberPicker"
     //%  blockId="RGB_LED_show" block="RGB LED number|%index show color|%rgb"
@@ -612,14 +626,14 @@ namespace mooncar {
         ws2812b.sendBuffer(neopixel_buf, DigitalPin.P12)
     }
 	
-	//% weight=4
+	//% weight=10
     //% brightness.min=0 brightness.max=255
     //% blockId="RGB_LED_set_brightness" block="RGB LED set brightness to |%brightness |(0~255)"
     export function rgb_led_set_setBrightness(brightness: number) {
         _brightness = brightness;
     }
 	
-	//% weight=4
+	//% weight=10
     //% r.min=0 r.max=255
     //% g.min=0 g.max=255
     //% b.min=0 b.max=255
@@ -628,7 +642,7 @@ namespace mooncar {
         return (r << 16) + (g << 8) + (b);
     }
 	
-	//% weight=4
+	//% weight=10
     //% blockId="RGB_LED_clear" block="RGB LED clear all"
     export function rgb_led_clear(): void {
         for (let i = 0; i < 16 * 3; i++) {
