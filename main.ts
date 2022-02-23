@@ -583,7 +583,7 @@ namespace mooncar {
     }
 	
 	//% weight=5
-    //% index.min=0 index.max=2
+    //% index.min=0 index.max=7
     //% rgb.shadow="colorNumberPicker"
     //%  blockId="RGB_LED_show" block="RGB LED number|%index show color|%rgb"
     export function rgb_led_show(index: number, rgb: number): void{
