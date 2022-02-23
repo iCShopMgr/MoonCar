@@ -192,7 +192,9 @@ namespace mooncar {
 
         return RdCl
     }
-    //=============================================================================
+    /*
+     * Color Senser
+    */
     let nowReadColor = [0, 0, 0]
     //% block="Color Sensor read color"
     export function ColorSensorReadColor(): void {
@@ -376,7 +378,9 @@ namespace mooncar {
     }
 
 
-    //=============================================================================
+    /*
+     * IR Remote
+    */
 
     //% block="Enable IR"
     export function EnIR(): void {
@@ -549,5 +553,85 @@ namespace mooncar {
         IRon(10140)
         IRoff(2280)
         IRon(620)
+    }
+    
+    /*
+     * RGB LED
+    */
+    let _brightness = 25
+    let neopixel_buf = pins.createBuffer(16 * 3);
+    for (let i = 0; i < 16 * 3; i++) {
+        neopixel_buf[i] = 0
+    }
+    for (let i = 0; i < 3; i++) {
+        rgb_led_clear();
+    }
+	
+	//% weight=4
+    //% rgb.shadow="colorNumberPicker"
+    //%  blockId="RGB_LED_show_all" block="All RGB LED show color|%rgb"
+    export function rgb_led_show_all(rgb: number): void{
+        let r = (rgb >> 16) * (_brightness / 255);
+        let g = ((rgb >> 8) & 0xFF) * (_brightness / 255);
+        let b = ((rgb) & 0xFF) * (_brightness / 255);
+        for (let i = 0; i < 3; i++) {
+            neopixel_buf[i * 3 + 0] = Math.round(g)
+            neopixel_buf[i * 3 + 1] = Math.round(r)
+            neopixel_buf[i * 3 + 2] = Math.round(b)
+        }
+        ws2812b.sendBuffer(neopixel_buf, DigitalPin.P12)
+    }
+	
+	//% weight=5
+    //% index.min=0 index.max=2
+    //% rgb.shadow="colorNumberPicker"
+    //%  blockId="RGB_LED_show" block="RGB LED number|%index show color|%rgb"
+    export function rgb_led_show(index: number, rgb: number): void{
+        let f = index;
+        let t = index;
+        let r = (rgb >> 16) * (_brightness / 255);
+        let g = ((rgb >> 8) & 0xFF) * (_brightness / 255);
+        let b = ((rgb) & 0xFF) * (_brightness / 255);
+
+        if (index > 15) {
+            if (((index >> 8) & 0xFF) == 0x02) {
+                f = index >> 16;
+                t = index & 0xff;
+            } else {
+                f = 0;
+                t = -1;
+            }
+        }
+        for (let i = f; i <= t; i++) {
+            neopixel_buf[i * 3 + 0] = Math.round(g)
+            neopixel_buf[i * 3 + 1] = Math.round(r)
+            neopixel_buf[i * 3 + 2] = Math.round(b)
+        }
+        ws2812b.sendBuffer(neopixel_buf, DigitalPin.P12)
+    }
+	
+	//% weight=4
+    //% brightness.min=0 brightness.max=255
+    //% blockId="RGB_LED_set_brightness" block="RGB LED set brightness to |%brightness |(0~255)"
+    export function rgb_led_set_setBrightness(brightness: number) {
+        _brightness = brightness;
+    }
+	
+	//% weight=4
+    //% r.min=0 r.max=255
+    //% g.min=0 g.max=255
+    //% b.min=0 b.max=255
+    //% blockId="RGB_LED_set_RGB" block="Red|%r Green|%g Blue|%b"
+    export function rgb_led_set_RGB(r: number, g: number, b: number): number {
+        return (r << 16) + (g << 8) + (b);
+    }
+	
+	//% weight=4
+    //% blockId="RGB_LED_clear" block="RGB LED clear all"
+    export function rgb_led_clear(): void {
+        for (let i = 0; i < 16 * 3; i++) {
+            neopixel_buf[i] = 0
+        }
+        ws2812b.sendBuffer(neopixel_buf, DigitalPin.P12)
     }
 }
