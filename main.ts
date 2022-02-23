@@ -410,9 +410,11 @@ namespace mooncar {
                 if (readir[0] > 4000 && readir[0] < 5000) {
                     basic.pause(100)
                     let one_data = 0
+					/*
                     for (let i = 0; i < readir.length; i++) {
                         serial.writeLine("" + readir[i])
                     }
+					*/
                     Pnumber = ""
                     //count
                     readCode = 0
