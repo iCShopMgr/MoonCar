@@ -514,7 +514,7 @@ namespace mooncar {
         }
     })
 	
-    //% block="IR Remote(NEC)" blockInlineInputs=true
+    //% block="IR Remote(NEC)"
     //% weight=11 blockGap=10
     export function IRRemote(add: Action): void {
         IRREAD = add
