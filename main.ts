@@ -484,7 +484,7 @@ namespace mooncar {
                         Pnumber += toHEX
                     }
                     else {
-                        Pnumber = "could not be parsed"
+                        Pnumber = "X"
                     }
                     
                     basic.pause(50)
