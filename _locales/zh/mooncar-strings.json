@@ -10,6 +10,7 @@
     "mooncar.LineFollowerSensor|block": "循跡感測器數值",
     "mooncar.UltrasonicSensor|block": "超音波距離感測器數值",
     "mooncar.PushBottom|block": "按鍵",
+    "mooncar.runButtonRead|block": "當按鍵被按下",
     "mooncar.ColorSensorinit|block": "顏色感測器初始化",
     "mooncar.Switch.Open|block": "開啟",
     "mooncar.Switch.Close|block": "關閉",
