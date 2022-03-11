@@ -1,4 +1,4 @@
-# MoorCar
+# MoorCar v2.0
 
 # Version
 * 2022/03/02 修改部分程式邏輯與翻譯.
