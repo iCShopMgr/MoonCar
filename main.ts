@@ -527,33 +527,30 @@ namespace mooncar {
         return Pnumber
     }
 
-    function IRon(d: number) {
-        let r = d;
-        while (r > 26) {
+    function pulseIR (num: number) {
+        while (num > 0) {
             pins.digitalWritePin(DigitalPin.P6, 1)
-            control.waitMicros(2);
+            control.waitMicros(10)
             pins.digitalWritePin(DigitalPin.P6, 0)
-            r = r - 26;
+            control.waitMicros(10)
+            num = num - 26
         }
     }
-
-    function IRoff(d: number) {
-        control.waitMicros(d);
-    }
-
+    
     function send(code: number) {
         for (let i = 7; i > -1; i--) {
             if (1 << i & code) {
-                IRon(560);
-                IRoff(1640);
+                pulseIR(600)
+                control.waitMicros(1720)
             } else {
-                IRon(560);
-                IRoff(560);
+                pulseIR(580)
+                control.waitMicros(660)
             }
         }
     }
     
     //% weight=11
+    //% irstring.defl="a25d"
     //% block="IR Send(NEC) %irnumber"
     export function IRcommand(irstring: string): void {
         let codeH = 0
@@ -577,17 +574,20 @@ namespace mooncar {
             }
         }
         let irnumber2 = codeL + codeH * 16
-        IRon(8500)
-        IRoff(4500)
-        send(0);
-        send(255);
-        send(irnumber1);
-        send(irnumber2);
-        IRon(550)
-        IRoff(40720)
-        IRon(10140)
-        IRoff(2280)
-        IRon(620)
+
+        led.enable(false)
+        pulseIR(9680)
+        control.waitMicros(4660)
+        send(0)
+        send(255)
+        send(irnumber1)
+        send(irnumber2)
+        pulseIR(640);
+        control.waitMicros(40940);
+        pulseIR(9480);
+        control.waitMicros(2340);
+        pulseIR(580);
+        led.enable(true)
     }
     
     /*
