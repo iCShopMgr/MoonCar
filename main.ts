@@ -540,11 +540,11 @@ namespace mooncar {
     function send(code: number) {
         for (let i = 7; i > -1; i--) {
             if (1 << i & code) {
-                pulseIR(600)
-                control.waitMicros(1720)
+                pulseIR(580)
+                control.waitMicros(1680)
             } else {
                 pulseIR(580)
-                control.waitMicros(660)
+                control.waitMicros(580)
             }
         }
     }
